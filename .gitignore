@@ -1,0 +1,4 @@
+/venvd
+/.idea
+/db.sqlite3
+/static/admin

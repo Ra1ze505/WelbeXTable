@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src={% static 'table/js/table_ajax.js' %}></script>
+
+</head>
+<body>
+
+                <form id="target">
+                {{ form.filter }}
+                {{ form.filter_method }}
+                {{ form.value }}
+                    <input type="submit"/>
+    </form>
+
+<table>
+<table border="1">
+   <caption>Single Page Application</caption>
+   <tr>
+    <th>Дата</th>
+    <th>Название</th>
+    <th>Количество</th>
+    <th>Расстояние</th>
+   </tr>
+    {% for item in object_list %}
+   <tr><td>{{ item.date }}</td><td>{{ item.title }}</td><td>{{ item.count }}</td><td>{{ item.distance }}</td></tr>
+    {% endfor %}
+</table>
+</table>
+</body>
+</html>
