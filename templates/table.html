@@ -18,7 +18,7 @@
     </form>
 
 <table>
-<table border="1">
+<table border="-1" id="ajax-target">
    <caption>Single Page Application</caption>
    <tr>
     <th>Дата</th>
@@ -26,10 +26,11 @@
     <th>Количество</th>
     <th>Расстояние</th>
    </tr>
-    {% for item in object_list %}
-   <tr><td>{{ item.date }}</td><td>{{ item.title }}</td><td>{{ item.count }}</td><td>{{ item.distance }}</td></tr>
-    {% endfor %}
+{#    {% for item in object_list %}#}
+{#   <tr><td>{{ item.date }}</td><td>{{ item.title }}</td><td>{{ item.count }}</td><td>{{ item.distance }}</td></tr>#}
+{#    {% endfor %}#}
 </table>
 </table>
+<div id="pages"></div>
 </body>
 </html>

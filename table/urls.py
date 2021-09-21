@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import ViewTable
+from .views import ViewTable, main
 
 app_name = 'table'
 
 urlpatterns = [
-    path('', ViewTable.as_view())
+    path('', main),
+    path('api/', ViewTable.as_view())
 
 ]

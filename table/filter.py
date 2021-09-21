@@ -1,4 +1,4 @@
-
+from  django.db.models.query import QuerySet
 
 class FilterTable:
     def __init__(self, queryset, *args, **kwargs):
@@ -6,17 +6,19 @@ class FilterTable:
         self.args = args[1:]
         self.kwargs = kwargs
         self.queryset = queryset
+        self.filtered_queryset = queryset
         self._get_filter()
 
     def _get_filter(self):
-        if self.params != {} and self.params['filter_method'] == '=':
-            self._equals()
-        elif self.params != {} and self.params['filter_method'] == '<':
-            self._smaller()
-        elif self.params != {} and self.params['filter_method'] == '>':
-            self._larger()
-        elif self.params != {} and self.params['filter_method'] == 'in':
-            self._enters()
+        if 'filter_method' in self.params:
+            if self.params['filter_method'] == '=':
+                self._equals()
+            elif self.params['filter_method'] == '<':
+                self._smaller()
+            elif self.params['filter_method'] == '>':
+                self._larger()
+            elif self.params != {} and self.params['filter_method'] == 'in':
+                self._enters()
 
     def _equals(self):
         param = {self.params['filter']: self.params['value']}
@@ -38,9 +40,10 @@ class FilterTable:
                 self.filtered_queryset.append(item)
 
     def __iter__(self):
-        try:
-            for i in self.filtered_queryset:
-                yield i
-        except AttributeError:
-            for i in self.queryset:
-                yield i
+        return self.filtered_queryset.__iter__()
+
+    def __len__(self):
+        return len(self.filtered_queryset)
+
+    def __getitem__(self, key):
+        return self.filtered_queryset.__getitem__(key)
