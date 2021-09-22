@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'WelbeX.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'USER': 'user',
         'NAME': 'table_data',
         'PASSWORD': 'password',

@@ -1,5 +1,3 @@
-from  django.db.models.query import QuerySet
-
 class FilterTable:
     def __init__(self, queryset, *args, **kwargs):
         self.params = args[0]
