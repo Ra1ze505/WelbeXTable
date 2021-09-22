@@ -6,10 +6,11 @@ class FilterTable:
         self.args = args[1:]
         self.kwargs = kwargs
         self.queryset = queryset
-        self.filtered_queryset = queryset
+        self.filtered_queryset = queryset  # на случай отсутствия фильтрации
         self._get_filter()
 
     def _get_filter(self):
+        """Проверяем метод фильтрации и вызываем соотвестствующий метод"""
         if 'filter_method' in self.params:
             if self.params['filter_method'] == '=':
                 self._equals()

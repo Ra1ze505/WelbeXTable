@@ -1,27 +1,15 @@
 jQuery(function ($) {
-    $("form").submit(function () {
-        // для читаемости кода
-        var filter = $('[name="filter"]').val();
-        var filter_method = $('[name="filter_method"]').val();
-        var value = $("input[name='value']").val()
-        var offset = 0
-        var url = 'http://localhost:8000/api/'
-        // вы же понимаете, о чём я тут толкую?
-        // это ведь одна из ипостасей AJAX-запроса
+    // Ajax в отдельной функции
+    function ajax(url, data = {}){
         $.ajax({
             url: url,
-            data: {
-                'filter': filter,
-                'filter_method': filter_method,
-                'value': value
-            },
+            data: data,
             success: function(response){
+                // Заполняем таблицу
                 var data = response.results
-                console.log(data)
                 var html = '';
                 $('#ajax-target tr').not(':first').remove();
                 for (let key=0; key<data.length;key++) {
-                    console.log('start')
                     html = '<tr><td>'
                  + data[key].date
                  + '</td><td class="whatever1">'
@@ -31,20 +19,49 @@ jQuery(function ($) {
                  + '</td><td class="whatever3">'
                  + data[key].distance
                  + '</td></tr>';
-                    console.log('hi');
                     $('#ajax-target').append(html);
-
-}
-            if (response.next != null){
-                html_button = '<a href='+ response.next +'>Следующая страница</a>'
-                $('#pages').append(html_button);
+                }
+                // Добавляем кнопки пагинации
+            if (response.next == null)
+                $('#next').hide()
+            else{
+                $('#next').show()
+                $('#next').prop('name', response.next)
 
             }
+            if (response.previous == null)
+                $('#previous').hide()
+            else{
+                $('#previous').show()
+                $('#previous').prop('name', response.previous)
             }
 
+            }
         });
+    }
+
+    $("form").submit(function () { // Отслеживаем отправку формы
+        var filter = $('[name="filter"]').val();
+        var filter_method = $('[name="filter_method"]').val();
+        var value = $("input[name='value']").val()
+        var offset = 0
+        var url = 'http://localhost:8000/api/'
+        data = {
+                'filter': filter,
+                'filter_method': filter_method,
+                'value': value
+            }
+        ajax(url, data = data)
         // отключаем действие по умолчанию
         return false;
     })
-        .submit();
+        .submit() // Вызываем при первой загрузке страницы
+    // Отслеживаем пагинацию
+    $("#next").click(function (){
+        ajax($(this).prop('name'))
+    })
+    $("#previous").click(function (){
+        ajax($(this).prop('name'))
+    })
+
 });

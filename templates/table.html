@@ -14,7 +14,7 @@
                 {{ form.filter }}
                 {{ form.filter_method }}
                 {{ form.value }}
-                    <input type="submit"/>
+                    <input id="filter" type="submit"/>
     </form>
 
 <table>
@@ -30,6 +30,8 @@
 {#   <tr><td>{{ item.date }}</td><td>{{ item.title }}</td><td>{{ item.count }}</td><td>{{ item.distance }}</td></tr>#}
 {#    {% endfor %}#}
 </table>
+    <button id="previous">Предыдущая</button>
+    <button id="next">Следующая</button>
 </table>
 <div id="pages"></div>
 </body>
