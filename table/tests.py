@@ -60,7 +60,7 @@ class TableTestCase(APITestCase):
         waiting_queryset = []
         for i in wq:
             waiting_queryset.append(i)
-        filter = []
+        filter_items = []
         for i in self.filter:
-            filter.append(i)
-        self.assertEqual(waiting_queryset, filter)
+            filter_items.append(i)
+        self.assertEqual(waiting_queryset, filter_items)
