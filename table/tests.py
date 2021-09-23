@@ -10,33 +10,33 @@ from .models import Table
 class TableTestCase(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        Table.objects.create(title='test-title',
+        Table.objects.create(title='test-title1',
                                    count=10,
                                    distance=100,
                                    date='08:43:00')
-        Table.objects.create(title='test-title',
+        Table.objects.create(title='test-title2',
                                    count=100,
                                    distance=10,
                                    date='08:43:00')
-        Table.objects.create(title='test-title',
+        Table.objects.create(title='test-title3',
                                    count=101,
                                    distance=1234,
                                    date='08:43:00')
-        Table.objects.create(title='test-title',
+        Table.objects.create(title='test-title4',
                                    count=1,
                                    distance=10,
                                    date='08:43:00')
-        Table.objects.create(title='test-title',
+        Table.objects.create(title='test-title5',
                                    count=1054,
                                    distance=1543,
                                    date='08:43:00')
-        Table.objects.create(title='test-title',
+        Table.objects.create(title='test-title6',
                                    count=5430,
                                    distance=54,
                                    date='08:43:00')
 
     def setUp(self) -> None:
-        self.table = Table.objects.filter(title='test-title')
+        self.table = Table.objects.all()
         self.factory = RequestFactory()
 
     @parameterized.expand([
